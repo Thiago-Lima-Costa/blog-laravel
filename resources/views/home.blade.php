@@ -4,7 +4,6 @@
 
 <section id="home" class="main-home parallax-section">
     <div class="overlay"></div>
-    <div id="particles-js"></div>
     <div class="container">
          <div class="row">
 
@@ -42,9 +41,9 @@
                                    <h3><a href="{{ route('post', $post->slug) }}">{{ $post->title }}</a></h3>
                               </div>
                               <div class="blog-post-format">
-                                   <span><a href="#"><img src="images/author-image1.jpg" class="img-responsive img-circle"> Jen Lopez</a></span>
-                                   <span><i class="fa fa-date"></i> July 22, 2017</span>
-                                   <span><a href="#"><i class="fa fa-comment-o"></i> 35 Comments</a></span>
+                                   <span><a href="#"><img src="{{ $post->user->thumb }}" class="img-responsive img-circle">{{ $post->user->firstName }} {{ $post->user->lastName }}</a></span>
+                                   <span><i class="fa fa-date"></i>{{ $post->created_at }}</span>
+                                   <span><a href="#"><i class="fa fa-comment-o"></i>{{ $post->comments->count() }}</a></span>
                               </div>
                               <div class="blog-post-des">
                                    <p>{{ Str::limit($post->content, 200, '...') }}</p>
