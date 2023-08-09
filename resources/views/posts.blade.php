@@ -7,14 +7,14 @@
     <div class="container">
          <div class="row">
 
-              <div class="col-md-12 col-sm-12">
-                   <h1>Bem vindo ao Meu Blog!</h1>
-                   <h4>Responsive Blog HTML CSS Website Template</h4>
-                   <form action="{{ route('posts') }}" method="get">
-                         <input type="text" name="search" class="btn btn-default" id="" placeholder="Buscar" value="{{ request()->input('search') ?? '' }}">
-                         <button type="submit">Buscar</button>
-                   </form>
-              </div>
+            <div class="col-md-12 col-sm-12">
+                <h1>Bem vindo ao Meu Blog!</h1>
+                <h4>Responsive Blog HTML CSS Website Template</h4>
+                <form action="{{ route('posts') }}" method="get">
+                      <input type="text" name="search" class="btn btn-default" id="" placeholder="Buscar" value="{{ request()->input('search') ?? '' }}">
+                      <button type="submit">Buscar</button>
+                </form>
+           </div>
 
          </div>
     </div>
@@ -57,7 +57,12 @@
                     
 
               </div>
-
+                @if (request()->input('search'))
+                    {{ $posts->appends(['search' => request()->input('search')])->links() }}
+                @else
+                    {{ $posts->links() }}
+                @endif
+                
          </div>
     </div>
 </section>
