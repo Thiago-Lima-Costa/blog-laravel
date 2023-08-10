@@ -14,6 +14,9 @@
                       <input type="text" name="search" class="btn btn-default" id="" placeholder="Buscar" value="{{ request()->input('search') ?? '' }}">
                       <button type="submit">Buscar</button>
                 </form>
+                @if (request()->input('search'))
+                    <h4>Sua busca encontrou {{ $posts->total() }} resultados</h4>
+                @endif
            </div>
 
          </div>

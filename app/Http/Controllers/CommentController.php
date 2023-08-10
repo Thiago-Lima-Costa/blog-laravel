@@ -2,22 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CommentPost;
 use App\Models\Comment;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-    public function store(Request $request)
+    public function store(Request $request, Post $post)
     {
         $validated = $request->validate(['comment' => 'required']);
 
         $created = Comment::create([
             'comment' => $validated['comment'],
             'user_id' => auth()->user()->id,
-            'post_id' => $request->input('post_id')
+            'post_id' => $post->id
         ]);
 
         if ($created) {
+            event(new CommentPost(auth()->user(), $post));
             return back();
         } else {
             return back()->with('error_create_comment', 'Ocorreu um erro ao cadastrar seu comentário, por favor tente novamente.');
@@ -26,9 +29,8 @@ class CommentController extends Controller
 
     }
 
-    public function destroy($id)
+    public function destroy(Comment $comment)
     {
-        $comment = Comment::find($id);
         $deleted = $comment->delete();
 
         if ($deleted) {

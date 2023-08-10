@@ -14,5 +14,5 @@ Route::get('/posts', [PostsController::class, 'index'])->name('posts');
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'store'])->name('login');
 Route::get('/logout', [LoginController::class, 'destroy'])->name('logout');
-Route::post('/comment', [CommentController::class, 'store'])->name('comment');
-Route::get('/comment/{id}', [CommentController::class, 'destroy'])->name('comment.destroy');
+Route::post('/comment/{post}', [CommentController::class,'store'])->name('comment');
+Route::get('/comment/{comment}', [CommentController::class, 'destroy'])->name('comment.destroy');

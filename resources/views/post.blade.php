@@ -79,9 +79,8 @@
                                   <span>{{ session()->get('error_create_comment') }}</span>
                               @endif
                               {{ $errors->first('comment') }}
-                              <form action="{{ route('comment') }}" method="post">
+                              <form action="{{ route('comment', $post->id) }}" method="post">
                                    @csrf
-                                   <input type="hidden" class="form-control" name="post_id" value="{{ $post->id }}">
                                    <textarea name="comment" rows="5" class="form-control" id="message" placeholder="Escreva um comentário!"></textarea>
                                    <div class="col-md-3 col-sm-4">
                                         <input name="submit" type="submit" class="form-control" id="submit" value="Enviar Comentário">
